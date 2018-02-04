@@ -30,6 +30,9 @@
     mounted: function () {
       let self = this;
 
+      let mintime=1000
+      let start=new Date().getTime()
+
       let loader = new SmartLoader({capacity: 2})
       loader.addImage('./img/loading1.png')
       loader.addImage('./img/loading2.png')
@@ -46,7 +49,17 @@
         loader.addImage('../img/loading/' + PrefixInteger(i, 5) + '.png',['image'],9)
       }*/
       loader.addCompletionListener(function () {
-        self.$emit('complete')
+        let now=new Date().getTime();
+        if(now-start<mintime){
+          setTimeout(function () {
+            self.$emit('complete')
+          },mintime-(now-start))
+
+        }else{
+          self.$emit('complete')
+        }
+
+
       });
 
       loader.start();
