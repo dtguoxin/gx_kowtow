@@ -65,11 +65,14 @@
 <script>
   import fastclick from 'fastclick'
   import VueSmartButton from 'vue-smart-button'
+  import JohnnyUtils from 'johnny-utils'
+  import jsonp from 'jsonp'
 
   export default {
     name: "bless",
     props: {
       bless: {default: {}}
+      ,server:{default:'/'}
     },
     data: function () {
       return {share_div: false}
@@ -80,6 +83,25 @@
 
       },
       share: function () {
+        let self=this;
+        jsonp(this.server+'/home/kowtow/', {
+          param: JohnnyUtils.Data.objectToString(this.bless) + '&callback',
+          timeout:60000,
+          prefix: '__jsonp_share_'
+        }, (err, data) => {
+          if (err && error) {
+            error(err)
+          } else {
+
+            window.WECHAT_SHARE.set('appmessage', 'title', self.bless.from+"给"+self.bless.to+'磕了'+self.bless.total+'个响头');
+            window.WECHAT_SHARE.set('appmessage', 'link', data.data.url);
+            window.WECHAT_SHARE.set('timeline', 'title', self.bless.from+"给"+self.bless.to+'磕了'+self.bless.total+'个响头');
+            window.WECHAT_SHARE.set('timeline', 'link', data.data.url);
+            window.WECHAT_SHARE.update();
+            console.log('success',data.data.url);
+          }
+        })
+
         this.$emit('share', true);
       },
 

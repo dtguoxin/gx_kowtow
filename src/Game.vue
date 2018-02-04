@@ -3,26 +3,343 @@
     <div class="game_bg">
       <img src="../img/game_bg.png" alt="">
     </div>
+    <transition name="fade" mode="out-in" appear>
+      <div v-if="num===45" class="game_bg">
+        <img src="../img/click1.png"/>
+      </div>
+    </transition>
+    <transition name="fade" mode="out-in" appear>
+      <div v-if="num===46" class="game_bg">
+        <img src="../img/click2.png"/>
+      </div>
+    </transition>
+    <transition name="fade" mode="out-in" appear>
+      <div v-if="num===47" class="game_bg">
+        <img src="../img/click3.png"/>
+      </div>
+    </transition>
+
+
+    <div v-if="num>=48&&num<=50" style="position: absolute;right: 0px;top:0px">
+      <vue-movie-clip :auto-play="true" :init-frame="1" width="640px"
+                      height="1240px" type="canvas" v-show="true" :frame-time="110"
+                      :frame="1"
+                      :frames="['../img/music1.png','../img/music2.png','../img/music3.png']"
+                      :loop="true" :forward="true">
+      </vue-movie-clip>
+    </div>
+
+
+    <div v-if="num===100" style="position: absolute;right: 0px;top:500px">
+      <vue-movie-clip :auto-play="true" :init-frame="1" width="640px"
+                      height="350px" type="canvas" v-show="true" :frame-time="110"
+                      :frame="1"
+                      :frames="['../img/dazhao1_02.png','../img/dazhao2_02.png','../img/dazhao3_02.png','../img/dazhao4_02.png','../img/dazhao5_02.png','../img/dazhao6_02.png','../img/dazhao7_02.png','../img/dazhao8_02.png','']"
+                      :loop="false" :forward="true" >
+      </vue-movie-clip>
+    </div>
+
+
+
     <div class="grade">
       <img src="../img/grade_btn.png" alt="">
       <p>{{displayNum}}</p>
     </div>
-    <div class="hint" v-if="num<=0">
-      <img src="../img/hint.png" alt="">
-    </div>
-    <div class="kt3" @touchstart="kowtow">
+    <transition name="fade" mode="out-in" appear>
+      <div class="hint" v-if="num<=0">
+        <img src="../img/hint.png" alt="">
+      </div>
+    </transition>
+    <div class="kt3" v-show="!bigKowTow">
       <vue-movie-clip ref="kowtow_mc" :auto-play="false" :init-frame="1" width="340px"
-                      height="517px" type="canvas" v-show="true" :frame-time="50"
+                      height="517px" type="canvas" v-show="true" :frame-time="70"
                       :frame="1" :frames="kt"
                       :loop="false" :forward="true" @stop="onKowtowStop" @play="onKowtowPlay">
 
       </vue-movie-clip>
     </div>
-    <!--<div class="easter_heart" v-show="num==5">-->
-    <!--<div class="heart" ref="heart">-->
-    <!--< img src="../img/heart.png" alt="">-->
-    <!--</div>-->
-    <!--</div>-->
+
+    <div v-if="num===5" style="position: absolute;left: 0px;top:0px">
+      <vue-smart-animator style="position: absolute;left: 80px;top:320px" v-for="frames in hearts" :frames="frames"
+                          :options="{
+                        startFrom: 1,
+                        pauseAt: [],
+                        prefix: false,
+                        count: 4,
+                        clear: true,
+                        applyOnEnd: true,
+                        instant: true
+                    }">
+        <img src="../img/heart.png" alt="">
+      </vue-smart-animator>
+    </div>
+
+    <div v-if="num===15" style="position: absolute;left: -75px;top:-80px">
+      <vue-smart-animator style="position: absolute;left: 80px;top:-100px" :frames="[{
+      styles: {'opacity':1,'top': '800px'},
+      configs: {'duration':'600ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
+    }]" :options="{
+                        startFrom: 0,
+                        pauseAt: [],
+                        prefix: false,
+                        count: 1,
+                        clear: true,
+                        applyOnEnd: true,
+                        instant: true
+                    }" @next="$refs.tetris2.play()">
+        <img src="../img/tetris_1.png" alt="">
+      </vue-smart-animator>
+      <vue-smart-animator ref="tetris2" style="position: absolute;left: 100px;top:-200px" :frames="[{
+      styles: {'opacity':1,'top': '720px'},
+      configs: {'duration':'600ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
+    }]" :options="options" @next="$refs.tetris3.play()">
+        <img src="../img/tetris_2.png" alt="">
+      </vue-smart-animator>
+      <vue-smart-animator ref="tetris3" style="position: absolute;left: 120px;top:-300px" :frames="[{
+      styles: {'opacity':1,'top': '540px'},
+      configs: {'duration':'600ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
+    }]" :options="options" @next="$refs.tetris4.play()">
+        <img src="../img/tetris_3.png" alt="">
+      </vue-smart-animator>
+      <vue-smart-animator ref="tetris4" style="position: absolute;left: 80px;top:-400px" :frames="[{
+      styles: {'opacity':1,'top': '420px'},
+      configs: {'duration':'600ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
+    }]" :options="options" @next="$refs.tetris5.play()">
+        <img src="../img/tetris_4.png" alt="">
+      </vue-smart-animator>
+      <vue-smart-animator ref="tetris5" style="position: absolute;left: 80px;top:-500px" :frames="[{
+      styles: {'opacity':1,'top': '386px'},
+      configs: {'duration':'600ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
+    }]" :options="options" @next="$refs.tetris6.play()">
+        <img src="../img/tetris_5.png" alt="">
+      </vue-smart-animator>
+      <vue-smart-animator ref="tetris6" style="position: absolute;left: 129px;top:-600px" :frames="[{
+      styles: {'opacity':1,'top': '200px'},
+      configs: {'duration':'600ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
+    }]" :options="options">
+        <img src="../img/tetris_6.png" alt="">
+      </vue-smart-animator>
+    </div>
+
+
+    <div v-if="num===30" style="position: absolute;left: -75px;top:-80px">
+      <vue-smart-animator ref="tetris8" style="position: absolute;left: 121px;top:422px;opacity:0" :frames="[{
+      styles: {'opacity':1,transform: 'translate(0px,0px) rotateZ(0deg) scale(0.65,0.65)'},
+      configs: {'duration':'250ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    }]" :options="options">
+        <img src="../img/majiang_single.png" alt="">
+      </vue-smart-animator>
+
+      <vue-smart-animator ref="tetris7" style="position: absolute;left: 174px;top:430px;opacity:0" :frames="[{
+      styles: {'opacity':1,transform: 'translate(0px,0px) rotateZ(0deg) scale(0.70,0.70)'},
+      configs: {'duration':'250ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    }]" :options="options" @next="$refs.tetris8.play()">
+        <img src="../img/majiang_single.png" alt="">
+      </vue-smart-animator>
+
+      <vue-smart-animator ref="tetris6" style="position: absolute;left: 230px;top:439px;opacity:0" :frames="[{
+      styles: {'opacity':1,transform: 'translate(0px,0px) rotateZ(0deg) scale(0.75,0.75)'},
+      configs: {'duration':'250ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    }]" :options="options" @next="$refs.tetris7.play()">
+        <img src="../img/majiang_single.png" alt="">
+      </vue-smart-animator>
+
+      <vue-smart-animator ref="tetris5" style="position: absolute;left: 289px;top:448px;opacity:0" :frames="[{
+      styles: {'opacity':1,transform: 'translate(0px,0px) rotateZ(0deg) scale(0.80,0.80)'},
+      configs: {'duration':'300ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    }]" :options="options" @next="$refs.tetris6.play()">
+        <img src="../img/majiang_single.png" alt="">
+      </vue-smart-animator>
+
+      <vue-smart-animator ref="tetris4" style="position: absolute;left: 350px;top:458px;opacity:0" :frames="[{
+      styles: {'opacity':1,transform: 'translate(0px,0px) rotateZ(0deg) scale(0.85,0.85)'},
+      configs: {'duration':'300ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    }]" :options="options" @next="$refs.tetris5.play()">
+        <img src="../img/majiang_single.png" alt="">
+      </vue-smart-animator>
+
+      <vue-smart-animator ref="tetris3" style="position: absolute;left: 416px;top:468px;opacity:0" :frames="[{
+      styles: {'opacity':1,transform: 'translate(0px,0px) rotateZ(0deg) scale(0.90,0.90)'},
+      configs: {'duration':'350ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    }]" :options="options" @next="$refs.tetris4.play()">
+        <img src="../img/majiang_single.png" alt="">
+      </vue-smart-animator>
+
+      <vue-smart-animator ref="tetris2" style="position: absolute;left: 490px;top:478px;opacity:0" :frames="[{
+      styles: {'opacity':1,transform: 'translate(0px,0px) rotateZ(0deg) scale(0.95,0.95)'},
+      configs: {'duration':'400ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    }]" :options="options" @next="$refs.tetris3.play()">
+        <img src="../img/majiang_single.png" alt="">
+      </vue-smart-animator>
+
+      <vue-smart-animator style="position: absolute;left: 280px;top:-100px" :frames="[{
+      styles: {'opacity':1,'top': '490px'},
+      configs: {'duration':'300ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in'}
+    },{
+      styles: {'opacity':1,'top': '490px'},
+      configs: {'duration':'300ms', 'fill-mode': 'forwards', 'timing-function': 'ease-out'}
+    },{
+      styles: {'opacity':1,'top': '490px','left':'570px'},
+      configs: {'duration':'100ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    }]" :options="{
+                        startFrom: 0,
+                        pauseAt: [],
+                        prefix: false,
+                        count: 1,
+                        clear: true,
+                        applyOnEnd: true,
+                        instant: true
+                    }" @next="$refs.tetris2.play()">
+        <img src="../img/majiang_single.png" alt="">
+      </vue-smart-animator>
+
+
+    </div>
+
+
+    <div v-if="num===40" style="position: absolute;right: 0px;top:480px">
+      <vue-movie-clip :auto-play="true" :init-frame="1" width="193px"
+                      height="454px" type="canvas" v-show="true" :frame-time="110"
+                      :frame="1"
+                      :frames="['../img/dog/dog1_03.png', '../img/dog/dog2_03.png', '../img/dog/dog3_03.png', '../img/dog/dog4_03.png', '../img/dog/dog5_03.png', '../img/dog/dog6_03.png', '../img/dog/dog7_03.png', '../img/dog/dog5_03.png', '../img/dog/dog7_03.png']"
+                      :loop="false" :forward="true" @stop="onKowtowStop" @play="onKowtowPlay">
+      </vue-movie-clip>
+    </div>
+
+
+
+    <div v-if="num===60" style="position: absolute;left: -75px;top:-80px">
+      <vue-smart-animator ref="boat_left" style="position: absolute;left: 0px;top:838px;opacity:0" :frames="[{
+      styles: {'opacity':1,left:'75px'},
+      configs: {'duration':'400ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    }]" :options="options">
+        <img src="../img/boat_left.png" alt="">
+      </vue-smart-animator>
+
+      <vue-smart-animator ref="boat_right" style="position: absolute;left: 447px;top:1000px;opacity:0" :frames="[{
+      styles: {'opacity':1,top:'948px'},
+      configs: {'duration':'500ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    }]" :options="options" >
+        <img src="../img/boat_right.png" alt="">
+      </vue-smart-animator>
+
+      <vue-smart-animator style="position: absolute;left: 400px;top:440px" :frames="[{
+      styles: {'opacity':1,'top': '490px','left':'79px'},
+      configs: {'duration':'200ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    }]" :options="{
+                        startFrom: 0,
+                        pauseAt: [],
+                        prefix: false,
+                        count: 1,
+                        clear: true,
+                        applyOnEnd: true,
+                        instant: true
+                    }" @next="$refs.boat_left.play();$refs.boat_right.play()">
+        <img src="../img/boat.png" alt="">
+      </vue-smart-animator>
+
+    </div>
+
+
+
+    <div v-if="num===70" style="position: absolute;left: -75px;top:-80px">
+      <vue-smart-animator style="position: absolute;left: 400px;top:440px" :frames="[{
+      styles: {'opacity':1,'top': '490px','left':'79px'},
+      configs: {'duration':'400ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    },{
+      styles: {'opacity':0,'top': '590px','left':'-179px'},
+      configs: {'duration':'200ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    }]" :options="{
+                        startFrom: 0,
+                        pauseAt: [],
+                        prefix: false,
+                        count: 1,
+                        clear: true,
+                        applyOnEnd: true,
+                        instant: true
+                    }" @next="$refs.big_mc.play()">
+        <img src="../img/boat.png" alt="">
+      </vue-smart-animator>
+
+      <vue-movie-clip ref="big_mc" v-show="bigKowTow" style="left: 185px;top:80px;position: absolute"  :auto-play="false" :init-frame="1" width="471px"
+                       height="736px" type="canvas"  :frame-time="110"
+                       :frame="1"
+                       :frames="['../img/jump3_02.png',  '../img/jump5_02.png',  '../img/jump4_02.png',  '../img/jump2_02.png',  '../img/jump1_02.png',  '../img/jump1_02.png',  '../img/jump1_02.png']"
+                       :loop="false" :forward="true" @stop="bigKowTow=false;enabled = true" @play="playBigTow">
+      </vue-movie-clip>
+
+    </div>
+
+
+
+
+    <div v-if="num===80" style="position: absolute;left: 0px;top:0px">
+      <vue-smart-animator style="position: absolute;left: 80px;top:0px" v-for="(frames,index) in foods" :frames="frames"
+                          :options="{
+                        startFrom: 1,
+                        pauseAt: [],
+                        prefix: false,
+                        count: 4,
+                        clear: true,
+                        applyOnEnd: true,
+                        instant: true
+                    }">
+        <img :src="'../img/food'+(index%5+1)+'.png'" alt="">
+      </vue-smart-animator>
+    </div>
+
+
+
+
+
+    <transition name="fade" mode="out-in" appear>
+    <div v-if="num===120&&gold===false" style="position: absolute;left: -75px;top:-80px">
+
+      <vue-smart-animator style="position: absolute;left: 200px;top:0px" :frames="[{
+      styles: {'opacity':1,'top': '490px','left':'200px'},
+      configs: {'duration':'400ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    },{
+      styles: {'opacity':1,'top': '470px','left':'200px'},
+      configs: {'duration':'200ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    },{
+      styles: {'opacity':1,'top': '470px','left':'200px'},
+      configs: {'duration':'2800ms', 'fill-mode': 'forwards', 'timing-function': 'ease-in-out'}
+    }]" :options="{startFrom: 0,
+                        pauseAt: [],
+                        prefix: false,
+                        count: 1,
+                        clear: true,
+                        applyOnEnd: true,
+                        instant: true
+                    }" @next="gold=true">
+        <img src="../img/gold.png" alt="">
+      </vue-smart-animator>
+
+      <vue-smart-animator style="position: absolute;left: 80px;top:0px" v-for="(frames,index) in stars" :frames="frames"
+                          :options="{
+                        startFrom: 1,
+                        pauseAt: [],
+                        prefix: false,
+                        count: 1,
+                        clear: true,
+                        applyOnEnd: true,
+                        instant: true
+                    }">
+        <img :src="'../img/gold_light_03.png'" alt="">
+      </vue-smart-animator>
+
+    </div>
+    </transition>
+
+    <div v-if="num>150" style="position: absolute;right: 0px;top:0px">
+      <vue-movie-clip :auto-play="true" :init-frame="1" width="640px"
+                      height="1240px" type="canvas" v-show="true" :frame-time="310"
+                      :frame="1"
+                      :frames="['../img/jinli1.png','../img/jinli2.png','../img/jinli3.png','../img/jinli4.png','../img/jinli3.png','../img/jinli4.png','']"
+                      :loop="false" :forward="true">
+      </vue-movie-clip>
+    </div>
+
     <!--<div class="dog" v-show="num==8">-->
     <!--<vue-movie-clip ref="dog" :auto-play="false" :init-frame="1" width="193px"-->
     <!--height="454px" type="canvas" v-show="true" :frame-time="100"-->
@@ -33,28 +350,31 @@
     <!--</div>-->
 
 
-    <div class="game_btn" v-if="showEndPanel"  >
-      <vue-smart-button class="again" >
-        <div slot="down" >
-          <img src="../img/again2.png" @click="showEndPanel=false" alt="">
-        </div>
-        <div slot="up"  >
-          <img src="../img/again.png" @click="showEndPanel=false" alt="">
-        </div>
-      </vue-smart-button>
+    <div style="width: 100%;height: 100%;position:absolute;top: 0;left: 0" @touchstart="kowtow"></div>
+    <transition name="fade" mode="out-in" appear>
+      <div class="game_btn" v-show="showEndPanel">
+        <vue-smart-button class="again">
+          <div slot="down">
+            <img src="../img/again2.png" @click="showEndPanel=false" alt="">
+          </div>
+          <div slot="up">
+            <img src="../img/again.png" @click="showEndPanel=false" alt="">
+          </div>
+        </vue-smart-button>
 
 
-      <vue-smart-button  class="rest"  >
-        <div slot="down" >
-          <img src="../img/rest2.png" @click="endGame" alt="">
-        </div>
-        <div slot="up"  >
-          <img src="../img/rest.png" @click="endGame"  alt="">
-        </div>
-      </vue-smart-button>
+        <vue-smart-button class="rest">
+          <div slot="down">
+            <img src="../img/rest2.png" @click="endGame" alt="">
+          </div>
+          <div slot="up">
+            <img src="../img/rest.png" @click="endGame" alt="">
+          </div>
+        </vue-smart-button>
 
 
-    </div>
+      </div>
+    </transition>
 
   </div>
 </template>
@@ -63,10 +383,11 @@
   import fastclick from 'fastclick'
   import VueSmartButton from 'vue-smart-button'
   import VueMovieClip from 'vue-movie-clip'
-
+  import VueSmartAnimator from 'vue-smart-animator'
+  import _ from 'underscore'
 
   let kt = []
-  kt.push('../img/active1.png', '../img/active2.png', '../img/active2.png', '../img/active2.png', '../img/active3.png', '../img/active3.png', '../img/active4.png', '../img/active1.png')
+  kt.push('./img/active1.png', './img/active2.png', './img/active2.png', './img/active2.png', './img/active4.png', './img/active1.png')
 
   let timeout_iv
 
@@ -74,11 +395,164 @@
     return (Array(n).join(0) + num).slice(-n);
   }
 
+
+  let hearts = [];
+  let count = 20
+
+  for (let i = 0; i < count; i++) {
+    let frames = [];
+
+    frames.push({
+      styles: {
+        opacity: 0,
+        'animation-delay': i * 50 + 'ms',
+        transform: 'translate(0px,0px) rotateZ(0deg) scale(0.01,0.01)'
+      },
+      configs: {'duration': '0ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
+    })
+    let x = (Math.random() * 600 - 300);
+
+    let y = (Math.random() * 600 - 300);
+    let rotate = 360 / count * i;
+    let time = _.random(200, 500)
+    let min = 60
+
+    if (x < 0) {
+      x -= min
+    } else {
+      x += min
+    }
+    if (y < 0) {
+      y -= min
+    } else {
+      y += min
+    }
+
+    frames.push({
+      styles: {
+        opacity: 1,
+        'animation-delay': '0ms',
+        transform: 'translate(' + x / 2 + 'px,' + y / 2 + 'px) rotateZ(' + rotate + 'deg) scale(0.1,0.1)'
+      },
+      configs: {'duration': time + 'ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
+    })
+
+    frames.push({
+      styles: {opacity: 0, transform: 'translate(' + x + 'px,' + y + 'px) rotateZ(' + rotate + 'deg) scale(0.05,0.05)'},
+      configs: {'duration': time + 'ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
+    })
+    hearts.push(frames)
+  }
+
+
+
+
+  let foods=[];
+  for (let i = 0; i < count; i++) {
+    let frames = [];
+    let x = (Math.random() * 900 - 400);
+    let rotate = 360 / count * i;
+    let time = _.random(400, 800)
+    let y = (2000-time);
+    let min = 60
+
+    if (x < 0) {
+      x -= min
+    } else {
+      x += min
+    }
+    if (y < 0) {
+      y -= min
+    } else {
+      y += min
+    }
+
+
+    frames.push({
+      styles: {
+        opacity: 1,
+        'animation-delay': i * 50 + 'ms',
+        transform: 'translate('+x+'px,-'+time+'px) rotateZ(0deg) scale(1,1)'
+      },
+      configs: {'duration': '0ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
+    })
+
+    frames.push({
+      styles: {
+        opacity: 1,
+        'animation-delay': '0ms',
+        transform: 'translate(' + x  + 'px,' + y / 2 + 'px) rotateZ(' + rotate + 'deg) scale(1.4,1.4)'
+      },
+      configs: {'duration': time + 'ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
+    })
+
+    frames.push({
+      styles: {opacity: 1, transform: 'translate(' + x + 'px,' + y + 'px) rotateZ(' + rotate + 'deg) scale(1.5,1.5)'},
+      configs: {'duration': time/1.1 + 'ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
+    })
+    foods.push(frames)
+  }
+
+
+  let stars=[];
+  for (let i = 0; i < count; i++) {
+    let frames = [];
+    let x = (Math.random() * 600 - 200);
+    let rotate = 360+_.random(0,200) ;
+    let time = _.random(2400, 2800)
+    let y = (Math.random() * 1200 - 200);
+    let min = 60
+    if (x < 0) {
+      x -= min
+    } else {
+      x += min
+    }
+    if (y < 0) {
+      y -= min
+    } else {
+      y += min
+    }
+    frames.push({
+      styles: {
+        opacity: 0,
+        'animation-delay': '0ms',
+        transform: 'translate(' + x  + 'px,' + y  + 'px) rotateZ(0deg) scale(.2,.2)'
+      },
+      configs: {'duration': time + 'ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
+    })
+    frames.push({
+      styles: {
+        opacity: 0,
+        'animation-delay': '0ms',
+        transform: 'translate(' + x  + 'px,' + y  + 'px) rotateZ(0deg) scale(1.4,1.4)'
+      },
+      configs: {'duration': time/2 + 'ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
+    })
+
+    frames.push({
+      styles: {opacity: 1, transform: 'translate(' + x + 'px,' + y + 'px) rotateZ(' + rotate + 'deg) scale(10.5,10.5)'},
+      configs: {'duration': time/1.1 + 'ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
+    })
+    stars.push(frames)
+  }
+
+
+
   export default {
     name: "game",
     props: {},
     data: function () {
-      return {num: 0, kt: kt, enabled: true, showEndPanel: false}
+      return {bigKowTow:false,gold:false,
+        num: 0, kt: kt, enabled: true, showEndPanel: false, hearts: hearts,foods:foods,stars:stars, options: {
+          startFrom: 0,
+          pauseAt: [],
+          prefix: false,
+          count: 1,
+          clear: true,
+          applyOnEnd: true,
+          instant: false
+        }
+      }
     },
     computed: {
       displayNum: function () {
@@ -90,18 +564,36 @@
         if (this.enabled) {
           clearTimeout(timeout_iv);
           this.num++;
+          if(this.num!==70){
           this.$refs.kowtow_mc.play()
-          this.$emit('total',  this.num)
-          this.$emit('playMp3', './media/kowtow.mp3')
-          timeout_iv = setTimeout(this.endPanel, 1000)
+            this.$emit('playMp3', './media/kowtow.mp3')
+            this.$emit('shake')
+          }
+          this.enabled = false
+
+          this.$emit('total', this.num)
+
+          if(this.num===50){
+            this.$emit('playMp3', './media/di.mp3')
+          }else if(this.num===51){
+            this.$emit('playMp3', './media/di.mp3',true)
+          }
+
+
+
+          timeout_iv = setTimeout(this.endPanel, 5000)
         }
+      },
+      playBigTow:function () {
+        this.bigKowTow=true;
+        this.$emit('playMp3', './media/kowtow.mp3')
       },
       endPanel: function () {
         this.showEndPanel = true;
 
 
       },
-      endGame:function () {
+      endGame: function () {
         this.$emit('state', 'gameover')
       },
 
@@ -110,7 +602,7 @@
         this.enabled = true
       },
       onKowtowPlay: function () {
-        this.enabled = false
+        //this.enabled = false
       },
       alsoplay: function () {
         this.$emit('state', 'kowtow')
@@ -119,7 +611,7 @@
         this.$emit('state', 'toplist')
       }
     },
-    components: {VueSmartButton: VueSmartButton, VueMovieClip: VueMovieClip},
+    components: {VueSmartButton: VueSmartButton, VueMovieClip: VueMovieClip, VueSmartAnimator: VueSmartAnimator},
     mounted: function () {
       fastclick.attach(this.$el)
     }
@@ -127,6 +619,17 @@
 </script>
 
 <style scoped>
+  .fade-enter-active, .fade-leave-active {
+    transition: all .2s linear;
+    opacity: 1;
+    /*transform: scale(1, 1);*/
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+    /*transform: scale(1.5, 1.5);*/
+  }
+
   .game {
     width: 100%;
     height: 100%;
@@ -199,10 +702,12 @@
 
   .game_btn {
     width: 100%;
-    height: 100%;
+    height: 102%;
+    margin-top: -1%;
     position: absolute;
     left: 0;
     top: 0;
+    background: rgba(0, 0, 0, 0.2);
   }
 
   .again {

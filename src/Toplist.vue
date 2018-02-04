@@ -73,7 +73,7 @@ let frames=[]
     },
     methods: {
       alsoplay: function () {
-        this.$emit('state', 'kowtow')
+        this.$emit('state', 'home')
 
       }
     },

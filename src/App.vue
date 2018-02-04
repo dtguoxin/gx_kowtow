@@ -1,30 +1,33 @@
 <template>
-  <div id="app">
-    <vue-fix-dom ref="fixdom" width="640px" height="1024px" align="default">
-      <loading @complete="oncomplete" v-if="state==='loading'">
+  <div id="app" :class="{'shaking':shaking}" style="position: absolute">
 
-      </loading>
-      <bless v-if="state==='bless'" :bless="bless" @state="goState">
+      <vue-fix-dom ref="fixdom" width="640px" height="1024px" align="default">
+        <loading @complete="oncomplete" v-if="state==='loading'">
 
-
-      </bless>
-      <game v-if="state==='kowtow'" :bless="bless" @state="goState" @playMp3="playMp3" @total="total">
+        </loading>
+        <bless v-if="state==='bless'" :bless="bless" @state="goState">
 
 
-      </game>
-      <game-over v-if="state==='gameover'" :bless="newBless" @share="showShare">
+        </bless>
+        <home v-if="state==='home'" @state="goState">
 
-      </game-over>
-
-      <toplist v-if="state==='toplist'" @state="goState" :server="server">
-
-      </toplist>
-
-      <share v-show="share_div"  @share="showShare"></share>
+        </home>
+        <game v-if="state==='kowtow'" :bless="bless" @state="goState" @playMp3="playMp3" @total="total" @shake="shake">
 
 
+        </game>
+        <game-over v-if="state==='gameover'" :bless="newBless" @share="showShare" :server="server">
 
-    </vue-fix-dom>
+        </game-over>
+
+        <toplist v-if="state==='toplist'" @state="goState" :server="server">
+
+        </toplist>
+
+        <share v-show="share_div" @share="showShare"></share>
+
+
+      </vue-fix-dom>
   </div>
 </template>
 
@@ -33,54 +36,102 @@
   import VueFixDom from 'vue-fix-dom'
   import Loading from './Loading'
   import Bless from './Bless'
+  import Home from './Home'
   import Game from './Game'
   import GameOver from './GameOver'
   import Toplist from './Toplist'
   import Share from './Share'
 
 
-  let SERVER='http://h5.2smart.cn/2018/kowtow/'
+  let SERVER = 'http://h5.2smart.cn/2018/kowtow/'
+
+  import WechatShare from 'johnny-wechat-share'
+
+  let option={}
+  option.api='http://h5.2smart.cn/wechat/js/'
+  option.shareData={
+    appmessage: {
+      title: "云磕头",//好友分享标题
+      desc: "云磕头-",//好友分享描述
+      img_url: "",//好友分享图片
+      link: SERVER //好友分享链接
+    }, timeline: {
+      title: "云磕头",//朋友圈分享标题
+      img_url: "",//朋友圈分享图片
+      link: SERVER//朋友圈分享链接
+    }
+  }
+
+  let shareURL = document.location.href;
+  window.WECHAT_SHARE = new WechatShare(encodeURIComponent(shareURL), option);
+
 
   //window.bless={from:'小强',to:'bac',total:1390}
-  window.newBless = {from: '溜溜', to: '三狗蛋子', total: 0}
+  if(!window.newBless){
+    window.newBless = {from: '溜溜', to: '三狗蛋子', total: 0}
+  }
+  // alert(window.newBless)
+  let allSound = {}
 
 
   export default {
     name: 'app',
     data() {
-      return {state: 'kowtow', bless: window.bless, newBless: newBless,share_div:false,server:SERVER}
+      return {state: 'loading', bless: window.bless, newBless: window.newBless, share_div: false, server: SERVER,shaking:false}
     },
     methods: {
+      shake:function () {
+        let self=this;
+       this.shaking=true;
+       setTimeout(function () {
+         self.shaking=false;
+       },0.3)
+      },
       oncomplete: function () {
         if (window.bless) {
           this.state = 'bless'
         } else {
-          this.state = 'kowtow'
+          this.state = 'home'
         }
       },
       goState: function (state) {
         this.state = state
       },
-      playMp3: function (url) {
-        let audio = new Audio()
-        audio.src = url;
-        audio.play()
-
+      playMp3: function (url, stop) {
+        if (!allSound.hasOwnProperty(url)) {
+          let audio = new Audio()
+          audio.src = url;
+          allSound[url] = audio
+        }
+        if (true === stop) {
+          allSound[url].pause()
+        } else {
+          allSound[url].play()
+        }
 
       },
       total: function (num) {
         this.newBless.total = num;
       },
-      showShare:function (show) {
+      showShare: function (show) {
 
-        this.share_div=show
+        this.share_div = show
       }
     },
 
     mounted: function () {
       fastclick.attach(this.$el)
     },
-    components: {Share: Share, VueFixDom: VueFixDom, Loading: Loading, Bless: Bless, Game: Game, GameOver: GameOver,Toplist:Toplist},
+    components: {
+      Share: Share,
+      VueFixDom: VueFixDom,
+      Loading: Loading,
+      Bless: Bless,
+      Game: Game,
+      GameOver: GameOver,
+      Toplist: Toplist,
+      Home: Home
+    },
   }
 </script>
 
@@ -98,5 +149,50 @@
     width: 100%;
     height: 100%;
   }
+  .shaking {
+    animation: shaking 0.2s ;
+    -webkit-animation:shaking 0.2s ;
+  }
+
+  @keyframes shaking {
+    0% {
+      top: 0px;
+    }
+    25% {
+      top: 5px;
+    }
+    50% {
+
+      top: -3px;
+    }
+    75% {
+
+      top: 2px;
+    }
+    100% {
+      top: 0px;
+    }
+  }
+  @-webkit-keyframes shaking {
+    0% {
+      top: 0px;
+    }
+    25% {
+      top: 5px;
+    }
+    50% {
+
+      top: -3px;
+    }
+    75% {
+
+      top: 2px;
+    }
+    100% {
+      top: 0px;
+    }
+  }
+
+
 
 </style>

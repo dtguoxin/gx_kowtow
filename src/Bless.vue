@@ -30,18 +30,18 @@
 
     <vue-smart-button class="wantkt">
       <div slot="down"  @click="alsoplay">
-        <img src="../img/btn_want.png" alt="">
+        <img src="../img/btn_want2.png" alt="">
       </div>
       <div slot="up"  @click="alsoplay">
-        <img src="../img/btn_want2.png" alt="">
+        <img src="../img/btn_want.png" alt="">
       </div>
     </vue-smart-button>
     <vue-smart-button  class="begin_ranking">
       <div slot="down"  @click="ranking">
-        <img src="../img/btn_ranking.png" alt="">
+        <img src="../img/paihangbang2.png" alt="">
       </div>
       <div slot="up"  @click="ranking">
-        <img src="../img/paihangbang2.png" alt="">
+        <img src="../img/btn_ranking.png" alt="">
       </div>
     </vue-smart-button>
 
@@ -61,7 +61,7 @@
       },
       methods:{
         alsoplay:function () {
-         this.$emit('state','kowtow')
+         this.$emit('state','home')
 
         }, ranking:function () {
          this.$emit('state','toplist')
