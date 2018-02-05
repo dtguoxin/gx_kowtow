@@ -12,6 +12,9 @@
     <div class="end_person">
       <img src="../img/end_person.png" alt="">
     </div>
+    <div class="end_light">
+      <img src="../img/end_light.png" alt="">
+    </div>
     <div class="frame">
       <img src="../img/word_bg.png" alt="">
       <div class="word_b">
@@ -25,40 +28,105 @@
 
     </div>
     <div class="tags">
-      <div class="baba" @click="changeTo('爸爸')">
-        <img src="../img/baba.png" alt="">
-      </div>
-      <div class="baba" @click="changeTo('妈妈')">
-        <img src="../img/mama.png" alt="">
-      </div>
-      <div class="baba" @click="changeTo('爷爷')">
-        <img src="../img/yeye.png" alt="">
-      </div>
-      <div class="baba" @click="changeTo('奶奶')">
-        <img src="../img/nainai.png" alt="">
-      </div>
-      <div class="nanpengyou" @click="changeTo('男朋友')">
-        <img src="../img/nanpengyou.png" alt="">
-      </div>
-      <div class="nanpengyou" @click="changeTo('女朋友')">
-        <img src="../img/nvpengyou.png" alt="">
-      </div>
-      <div class="nanpengyou" @click="changeTo('财神爷')">
-        <img src="../img/caishenye.png" alt="">
-      </div>
-      <div class="jinli" @click="changeTo('运势锦鲤')">
-        <img src="../img/jinli.png" alt="">
-      </div>
-      <div class="baba" @click="changeTo('水逆')">
-        <img src="../img/shuini.png" alt="">
-      </div>
-      <div class="nanpengyou" @click="changeTo('外星人')">
-        <img src="../img/waixingren.png" alt="">
-      </div>
+      <vue-smart-button class="baba">
+        <div slot="up" @click="changeTo('爸爸')" class="tags_up" style="background: url('./img/baba.png') no-repeat center">
+          <!--<img src="../img/baba.png" alt="">-->
+        </div>
+        <div slot="down" @click="changeTo('爸爸')" class="tags_down" style="background: url('./img/baba2.png') no-repeat center">
+          <!--<img src="../img/baba2.png" alt="">-->
+        </div>
+      </vue-smart-button>
+
+      <vue-smart-button class="baba">
+        <div slot="up" @click="changeTo('妈妈')" class="tags_up" style="background: url('./img/mama.png') no-repeat center">
+          <!--<img src="../img/mama.png" alt="">-->
+        </div>
+        <div slot="down" @click="changeTo('妈妈')" class="tags_down" style="background: url('./img/mama2.png') no-repeat center">
+          <!--<img src="../img/mama2.png" alt="">-->
+        </div>
+      </vue-smart-button>
+
+      <vue-smart-button class="baba">
+        <div slot="up" @click="changeTo('爷爷')" class="tags_up" style="background: url('./img/yeye.png') no-repeat center">
+          <!--<img src="../img/yeye.png" alt="">-->
+        </div>
+        <div slot="down" @click="changeTo('爷爷')" class="tags_down" style="background: url('./img/yeye2.png') no-repeat center">
+          <!--<img src="../img/yeye2.png" alt="">-->
+        </div>
+      </vue-smart-button>
+
+      <vue-smart-button class="baba">
+        <div slot="up" @click="changeTo('奶奶')" class="tags_up" style="background: url('./img/nainai.png') no-repeat center">
+          <!--<img src="../img/nainai.png" alt="">-->
+        </div>
+        <div slot="down" @click="changeTo('奶奶')" class="tags_down" style="background: url('./img/nainai2.png') no-repeat center">
+          <!--<img src="../img/nainai2.png" alt="">-->
+        </div>
+      </vue-smart-button>
+
+      <vue-smart-button class="nanpengyou">
+        <div slot="up" @click="changeTo('男朋友')" class="tags_up" style="background: url('./img/nanpengyou.png') no-repeat center">
+          <!--<img src="../img/nanpengyou.png" alt="">-->
+        </div>
+        <div slot="down" @click="changeTo('男朋友')" class="tags_down" style="background: url('./img/nanpengyou2.png') no-repeat center">
+          <!--<img src="../img/nanpengyou2.png" alt="">-->
+        </div>
+      </vue-smart-button>
+
+      <vue-smart-button class="nanpengyou">
+        <div slot="up" @click="changeTo('女朋友')" class="tags_up" style="background: url('./img/nvpengyou.png') no-repeat center">
+          <!--<img src="../img/nvpengyou.png" alt="">-->
+        </div>
+        <div slot="down" @click="changeTo('女朋友')" class="tags_down" style="background: url('./img/nvpengyou2.png') no-repeat center">
+          <!--<img src="../img/nvpengyou2.png" alt="">-->
+        </div>
+      </vue-smart-button>
+
+      <vue-smart-button class="nanpengyou">
+        <div slot="up" @click="changeTo('财神爷')" class="tags_up" style="background: url('./img/caishenye.png') no-repeat center">
+          <!--<img src="../img/caishenye.png" alt="">-->
+        </div>
+        <div slot="down" @click="changeTo('财神爷')" class="tags_down" style="background: url('./img/caishenye2.png') no-repeat center">
+          <!--<img src="../img/caishenye2.png" alt="">-->
+        </div>
+      </vue-smart-button>
+
+      <vue-smart-button class="jinli">
+        <div slot="up" @click="changeTo('运势锦鲤')" class="tags_up" style="background: url('./img/jinli.png') no-repeat center">
+          <!--<img src="../img/jinli.png" alt="">-->
+        </div>
+        <div slot="down" @click="changeTo('运势锦鲤')" class="tags_down" style="background: url('./img/jinli2.png') no-repeat center">
+          <!--<img src="../img/jinli2.png" alt="">-->
+        </div>
+      </vue-smart-button>
+
+      <vue-smart-button class="baba">
+        <div slot="up" @click="changeTo('水逆')" class="tags_up" style="background: url('./img/shuini.png') no-repeat center">
+          <!--<img src="../img/shuini.png" alt="">-->
+        </div>
+        <div slot="down" @click="changeTo('水逆')" class="tags_down" style="background: url('./img/shuini2.png') no-repeat center">
+          <!--<img src="../img/shuini2.png" alt="">-->
+        </div>
+      </vue-smart-button>
+
+      <vue-smart-button class="nanpengyou">
+        <div slot="up" @click="changeTo('外星人')" class="tags_up" style="background: url('./img/waixingren.png') no-repeat center">
+          <!--<img src="../img/waixingren.png" alt="">-->
+        </div>
+        <div slot="down" @click="changeTo('外星人')" class="tags_down" style="background: url('./img/waixingren2.png') no-repeat center">
+          <!--<img src="../img/waixingren2.png" alt="">-->
+        </div>
+      </vue-smart-button>
     </div>
-    <div class="bainian" @click="share">
-      <img src="../img/bainian.png" alt="">
-    </div>
+
+    <vue-smart-button class="bainian">
+      <div slot="up" @click="share" class="bainian_up">
+        <!--<img src="../img/bainian.png" alt="">-->
+      </div>
+      <div slot="down" @click="share" class="bainian_down">
+        <!--<img src="../img/bainian2.png" alt="">-->
+      </div>
+    </vue-smart-button>
   </div>
 </template>
 
@@ -235,8 +303,16 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    animation: left 1s linear;
   }
-
+  @keyframes left {
+    0%{
+      left:-446px;
+    }
+    100%{
+      left:10px;
+    }
+  }
   .baba {
     width: 109px;
     height: 89px;
@@ -258,8 +334,16 @@
     position: absolute;
     right: 9px;
     bottom: 10px;
+    animation: right 1s linear;
   }
-
+  @keyframes right {
+    0%{
+      right:-180px;
+    }
+    100%{
+      right:10px;
+    }
+  }
   @keyframes rotate {
     0% {
       transform: rotate(0deg);
@@ -275,6 +359,46 @@
     }
     100% {
       transform: rotate(360deg);
+    }
+  }
+  .baba,.nanpengyou,.jinli{
+    position: relative;
+  }
+  .tags_up{
+    width: 100%;height:100%;position: absolute;left:0;top:0;
+  }
+  .tags_down{
+    width: 100%;height:100%;position: absolute;left:0;top:0;
+  }
+  .bainian_up{
+    width: 100%;height:100%;position: absolute;left:0;top:0;
+    background: url("../img/bainian.png") no-repeat center;
+  }
+  .bainian_down{
+    width: 100%;height:100%;position: absolute;left:0;top:0;
+    background: url("../img/bainian2.png") no-repeat center;
+  }
+  .end_light{
+    width: 300px;height:450px;
+    position: absolute;right:178px;top:326px;
+    animation: end_rotate 4s infinite linear;
+    transform-origin: right top;
+  }
+  @keyframes end_rotate {
+    0%{
+      transform: rotate(0deg)
+    }
+    25%{
+      transform: rotate(15deg);
+    }
+    50%{
+      transform: rotate(0deg);
+    }
+    75%{
+      transform: rotate(-15deg);
+    }
+    100%{
+      transform: rotate(0deg);
     }
   }
 </style>

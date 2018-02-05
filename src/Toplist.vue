@@ -24,12 +24,23 @@
       <div class="pa_right">
         <img src="../img/climb_right.png" alt="">
       </div>
-      <div class="rank_kt" @click="alsoplay">
-        <img src="../img/btn_want.png" alt="">
-      </div>
-      <div class="rank_replenish">
-        <img src="../img/replenish.png" alt="">
-      </div>
+      <vue-smart-button class="rank_kt">
+        <div slot="up" @click="alsoplay" class="rank_up">
+          <!--<img src="../img/btn_want.png" alt="">-->
+        </div>
+        <div slot="down" @click="alsoplay" class="rank_down">
+          <!--<img src="../img/btn_want2.png" alt="">-->
+        </div>
+      </vue-smart-button>
+      <vue-smart-button class="rank_replenish">
+        <div slot="up" class="rep_up">
+          <!--<img src="../img/replenish.png" alt="">-->
+        </div>
+        <div slot="down" class="rep_down">
+          <!--<img src="../img/replenish2.png" alt="">-->
+        </div>
+      </vue-smart-button>
+
       <!--<div class="process">-->
         <!--<img src="../img/frame.png" alt="">-->
         <!--<div class="bar">-->
@@ -152,5 +163,21 @@ let self=this;
   }
   .rank_order>.yel{
     color: #fff100;
+  }
+  .rank_up,.rank_down,.rep_up,.rep_down{
+    width: 100%;height:100%;
+    position: absolute;left:0;top:0;
+  }
+  .rank_up{
+    background: url("../img/btn_want.png") no-repeat center;
+  }
+  .rank_down{
+    background: url("../img/btn_want2.png") no-repeat center;
+  }
+  .rep_up{
+    background: url("../img/replenish.png") no-repeat center;
+  }
+  .rep_down{
+    background: url("../img/replenish2.png") no-repeat center;
   }
 </style>

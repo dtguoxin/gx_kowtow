@@ -89,7 +89,7 @@
                     }" @next="$refs.tetris2.play()">
         <img src="../img/tetris_1.png" alt="">
       </vue-smart-animator>
-      <vue-smart-animator ref="tetris2" style="position: absolute;left: 100px;top:-200px" :frames="[{
+      <vue-smart-animator ref="tetris2" style="position: absolute;left: 100px;top:-200px;" :frames="[{
       styles: {'opacity':1,'top': '720px'},
       configs: {'duration':'600ms', 'fill-mode': 'forwards', 'timing-function': 'linear'}
     }]" :options="options" @next="$refs.tetris3.play()">
@@ -354,11 +354,11 @@
     <transition name="fade" mode="out-in" appear>
       <div class="game_btn" v-show="showEndPanel">
         <vue-smart-button class="again">
-          <div slot="down">
-            <img src="../img/again2.png" @click="showEndPanel=false" alt="">
+          <div slot="down" class="again_down" @click="showEndPanel=false">
+            <img src="../img/again2.png"  alt="">
           </div>
-          <div slot="up">
-            <img src="../img/again.png" @click="showEndPanel=false" alt="">
+          <div slot="up" class="again_up" @click="showEndPanel=false">
+            <img src="../img/again.png" alt="">
           </div>
         </vue-smart-button>
 
@@ -716,8 +716,16 @@
     position: absolute;
     left: 10px;
     bottom: 10px;
+    animation: fade .2s linear;
   }
-
+@keyframes fade {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
   .rest {
     width: 169px;
     height: 265px;
@@ -1013,12 +1021,22 @@
       bottom: 200px;
     }
   }
-
   .dog {
     width: 193px;
     height: 454px;
     position: absolute;
     right: 0;
     bottom: 110px;
+  }
+  @keyframes tetris_rotate {
+    0%{
+      transform: rotate(90deg);
+    }
+    50%{
+      transform: rotate(45deg);
+    }
+    100%{
+      transform: rotate(0deg);
+    }
   }
 </style>

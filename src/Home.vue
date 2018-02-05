@@ -24,9 +24,14 @@
       <img  src="../img/bg.png" alt="">
     </div>
     <transition name="downup" mode="out-in" appear>
-      <div v-show="true" class="begin_kt" @click="begin_play">
-        <img src="../img/begin_kt.png" alt="">
-      </div>
+      <vue-smart-button class="begin_kt">
+        <div v-show="true" slot="up" @click="begin_play" class="beginkt_up" style="background: url('./img/begin_kt.png') no-repeat center">
+          <!--<img src="../img/begin_kt.png" alt="">-->
+        </div>
+        <div v-show="true" slot="down" @click="begin_play" class="beginkt_down" style="background: url('./img/begin_kt2.png') no-repeat center">
+          <!--<img src="../img/begin_kt2.png" alt="">-->
+        </div>
+      </vue-smart-button>
     </transition>
     <div class="pay_year" ref="pay_year">
       <transition name="fade" mode="out-in" appear>
@@ -364,5 +369,9 @@
     transition-delay: 1.2s;
 
     top: 480px;
+  }
+  .beginkt_up,.beginkt_down{
+    width: 100%;height:100%;
+    position: absolute;left:0;top:0;
   }
 </style>

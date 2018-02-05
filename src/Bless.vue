@@ -29,19 +29,19 @@
     </div>
 
     <vue-smart-button class="wantkt">
-      <div slot="down"  @click="alsoplay">
-        <img src="../img/btn_want2.png" alt="">
+      <div slot="down"  @click="alsoplay" class="wantkt_down">
+        <!--<img src="../img/btn_want2.png" alt="">-->
       </div>
-      <div slot="up"  @click="alsoplay">
-        <img src="../img/btn_want.png" alt="">
+      <div slot="up"  @click="alsoplay" class="wantkt_up">
+        <!--<img src="../img/btn_want.png" alt="">-->
       </div>
     </vue-smart-button>
     <vue-smart-button  class="begin_ranking">
-      <div slot="down"  @click="ranking">
-        <img src="../img/paihangbang2.png" alt="">
+      <div slot="down"  @click="ranking" class="ranking_down">
+        <!--<img src="../img/paihangbang2.png" alt="">-->
       </div>
-      <div slot="up"  @click="ranking">
-        <img src="../img/btn_ranking.png" alt="">
+      <div slot="up"  @click="ranking" class="ranking_up">
+        <!--<img src="../img/btn_ranking.png" alt="">-->
       </div>
     </vue-smart-button>
 
@@ -160,16 +160,43 @@
   .wantkt{
     width: 265px;height:169px;
     position: absolute;bottom:10px;left:10px;
-  }
-  .btn_want{
-    position: absolute;left:0;top:0;
-  }
-  .btn_want2{
-    position: absolute;
-    left: 0;top:0;
+    animation: left .5s linear;
   }
   .begin_ranking{
     width: 265px;height:169px;
     position: absolute;bottom:10px;right:10px;
+    animation: right .5s linear;
+  }
+  @keyframes left {
+    0%{
+      left:-180px;
+    }
+    100%{
+      left:10px;
+    }
+  }
+  @keyframes right {
+    0%{
+      right:-180px;
+    }
+    100%{
+      right:10px;
+    }
+  }
+  .wantkt_down,.wantkt_up,.ranking_down,.ranking_up{
+    width: 100%;height:100%;
+    position: absolute;left:0;top:0;
+  }
+  .wantkt_down{
+    background: url("../img/btn_want2.png") no-repeat center;
+  }
+  .wantkt_up{
+    background: url("../img/btn_want.png") no-repeat center;
+  }
+  .ranking_up{
+    background: url("../img/btn_ranking.png") no-repeat center;
+  }
+  .ranking_down{
+    background: url("../img/paihangbang2.png") no-repeat center;
   }
 </style>
